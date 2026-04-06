@@ -99,7 +99,36 @@ public class linkedList {
             tail = prev;
             size--;
             return n;
+        }
+        public int searchElement(int elem){
+            int i =0;
+            Node temp = head;
+            while (temp!=null) {
+                if (temp.data == elem) {
+                    return i;
+                }
+                temp = temp.next;
+                i++;
+            }
+            return -1;
+        }
 
+        public static int helper(Node head,int key){
+            if (head == null) {
+                return -1;
+            }
+            if (head.data == key){
+                return 0;
+            } 
+            int idx = helper(head.next, key);
+            if (idx == -1) {
+                return -1;
+            }
+            return idx+1; // as after each recursive call the index will be for its prev call then prev call refernce
+        }
+
+        public static int recSearch(int key){
+            return helper(head,key); 
         }
 
     public static void main(String[] args) {
@@ -114,6 +143,9 @@ public class linkedList {
         ll.print();
         ll.removeLast();
         ll.print();
+     int x =    ll.searchElement(3);
+     System.out.println(x);
         System.out.println(size);
+        System.out.println(recSearch(99 ));
     }
 }
